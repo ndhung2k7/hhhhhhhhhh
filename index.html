@@ -13,7 +13,7 @@
     let hours = date.getHours();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
-    let day_night = "AM";
+    let day_night = "";
 
     if (hours >= 12) {
       day_night = "PM";
@@ -83,6 +83,7 @@
     <!-- Các phần khác -->
     <button onclick="playMusic()">🎵 Bật/Tắt nhạc</button>
   </div>
+<div id="fps-display"></div>
 
   <!-- Nhạc -->
   <audio id="bg-music" loop>
