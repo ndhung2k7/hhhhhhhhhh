@@ -5,6 +5,29 @@
   <title>Menu Sidebar Settings</title>
   <link rel="stylesheet" href="style.css">
 </head>
+  <script>
+  setInterval(() => {
+    const time = document.querySelector("#time");
+    if (!time) return; // tránh lỗi nếu phần clock chưa tải
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let day_night = "AM";
+
+    if (hours >= 12) {
+      day_night = "PM";
+      hours = hours > 12 ? hours - 12 : hours;
+    }
+    if (hours === 0) hours = 12;
+    if (seconds < 10) seconds = "0" + seconds;
+    if (minutes < 10) minutes = "0" + minutes;
+    if (hours < 10) hours = "0" + hours;
+
+    time.textContent = `${hours}:${minutes}:${seconds} ${day_night}`;
+  }, 1000);
+</script>
+
 <body>
   <!-- Icon setting -->
   <div class="settings-icon" onclick="toggleMenu()">⚙️</div>
@@ -46,6 +69,16 @@
         </label>
       </div>
     </div>
+<!-- 🔹 Đồng hồ ở dưới cùng -->
+<div class="menu-clock">
+  <div class="clock-wrapper">
+    <div class="clock-display">
+      <div id="time"></div>
+    </div>
+    <span></span>
+    <span></span>
+  </div>
+</div>
 
     <!-- Các phần khác -->
     <button onclick="playMusic()">🎵 Bật/Tắt nhạc</button>
@@ -58,4 +91,5 @@
 <script src="rainbow.js" defer></script>
   <script src="script.js"></script>
 </body>
+
 </html>
