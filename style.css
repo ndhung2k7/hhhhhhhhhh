@@ -524,4 +524,17 @@ input:checked ~ .stars {
     filter: hue-rotate(360deg);
   }
 }
-
+#fps-display {
+  position: fixed;         /* cố định trên màn hình */
+  bottom: 10px;            /* cách đáy 10px */
+  left: 10px;              /* cách trái 10px */
+  z-index: 99999;          /* hiển thị trên tất cả lớp khác */
+  color: #00ff00;          /* màu chữ */
+  font-size: 14px;
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.5); /* nền bán trong suốt */
+  padding: 5px 10px;
+  border-radius: 6px;
+  pointer-events: none;    /* để không ảnh hưởng đến click */
+  user-select: none;       /* không cho bôi đen chữ */
+}
