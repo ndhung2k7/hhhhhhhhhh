@@ -14,6 +14,17 @@ body {
   transition: background-color 0.4s, color 0.4s;
   margin: 0;
 }
+/* Mặc định: mobile - menu rộng 50% */
+.menu {
+  width: 50%;
+}
+
+/* Khi màn hình lớn hơn 768px (PC) */
+@media (min-width: 768px) {
+  .menu {
+    width: 30%;
+  }
+}
 
 /* ==== ICON SETTINGS ==== */
 .settings-icon {
@@ -44,23 +55,6 @@ body {
 }
 
 /* ==== SIDEBAR MENU ==== */
-.settings-sidebar {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 40%;
-  height: 100%;
-  background: url("https://i.imgur.com/YvAkB4f.jpeg") no-repeat center center;
-  background-size: cover;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
-  transition: right 0.3s ease;
-  z-index: 1002;
-  padding: 20px;
-  overflow-y: auto;
-  color: #111;
-}
 .settings-sidebar {
   position: fixed;
   top: 0;
@@ -555,4 +549,3 @@ input:checked ~ .stars {
   pointer-events: none;    /* để không ảnh hưởng đến click */
   user-select: none;       /* không cho bôi đen chữ */
 }
-
