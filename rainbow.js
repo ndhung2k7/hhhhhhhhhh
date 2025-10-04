@@ -54,3 +54,31 @@ window.addEventListener("DOMContentLoaded", () => {
   const myRainbowSpan = new RainbowSpan(r1, 0, 360, 255, 50, 18);
   myRainbowSpan.timer = setInterval(() => myRainbowSpan.moveRainbow(), myRainbowSpan.speed);
 });
+(function() {
+  const fpsDisplay = document.getElementById('fps-display');
+  let lastFrameTime = performance.now();
+  let frameCount = 0;
+  let fps = 0;
+
+  function update() {
+    const now = performance.now();
+    frameCount++;
+    const delta = now - lastFrameTime;
+
+    if (delta >= 1000) { // mỗi 1 giây tính FPS một lần
+      fps = Math.round((frameCount * 1000) / delta);
+      fpsDisplay.textContent = `FPS: ${fps}`;
+      frameCount = 0;
+      lastFrameTime = now;
+
+      // đổi màu nếu FPS thấp
+      if (fps >= 50) fpsDisplay.style.color = '#00ff00'; // xanh
+      else if (fps >= 30) fpsDisplay.style.color = '#ffff00'; // vàng
+      else fpsDisplay.style.color = '#ff0000'; // đỏ
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  update();
+})();
