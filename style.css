@@ -43,12 +43,11 @@ body {
   pointer-events: all;
 }
 
-/* ==== SIDEBAR MENU ==== */
 .settings-sidebar {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 50%;
+  width: 40%; /* giữ nguyên, dùng làm giá trị trung gian */
   height: 100%;
   background: url("https://i.imgur.com/YvAkB4f.jpeg") no-repeat center center;
   background-size: cover;
@@ -61,6 +60,21 @@ body {
   overflow-y: auto;
   color: #111;
 }
+
+/* 📱 Mobile: menu rộng 50% */
+@media (max-width: 767px) {
+  .settings-sidebar {
+    width: 50%;
+  }
+}
+
+/* 🖥️ PC: menu rộng 30% */
+@media (min-width: 768px) {
+  .settings-sidebar {
+    width: 30%;
+  }
+}
+
 .settings-sidebar.active {
   right: 0;
 }
@@ -538,3 +552,4 @@ input:checked ~ .stars {
   pointer-events: none;    /* để không ảnh hưởng đến click */
   user-select: none;       /* không cho bôi đen chữ */
 }
+
