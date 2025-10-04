@@ -1,0 +1,464 @@
+/* ==== RESET ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==== TOÀN TRANG ==== */
+body {
+  font-family: Arial, sans-serif;
+  background: url("images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #222;
+  transition: background-color 0.4s, color 0.4s;
+  margin: 0;
+}
+
+/* ==== ICON SETTINGS ==== */
+.settings-icon {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* ==== OVERLAY ==== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ==== SIDEBAR MENU ==== */
+.settings-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 40%;
+  height: 100%;
+  background: url("https://i.imgur.com/YvAkB4f.jpeg") no-repeat center center;
+  background-size: cover;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  transition: right 0.3s ease;
+  z-index: 1002;
+  padding: 20px;
+  overflow-y: auto;
+  color: #111;
+}
+.settings-sidebar.active {
+  right: 0;
+}
+
+.settings-sidebar h2 {
+  margin-top: 0;
+}
+
+.settings-sidebar button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.6);
+  color: #111;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.3s;
+}
+
+.settings-sidebar button:hover {
+  background: rgba(255,255,255,0.8);
+}
+
+/* ==== DARK MODE ==== */
+.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+/* ---- Fix màu nút sáng/tối ---- */
+.dark-mode #theme-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.dark-mode #theme-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Toàn menu khi tối ---- */
+.dark-mode .settings-sidebar {
+  background: url("https://i.imgur.com/DrRewbN.jpeg") no-repeat center center;
+  background-size: cover;
+  color: #fff;
+}
+
+.dark-mode .settings-sidebar button {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.dark-mode .settings-sidebar button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==== NÚT GẠT (DAY/NIGHT SWITCH) ==== */
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.label-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Nút gạt gốc từ file bạn gửi */
+#toggle {
+  display: none;
+}
+
+#toggle-label {
+  cursor: pointer;
+  outline: transparent;
+}
+
+#toggle-div {
+  height: 120px;
+  width: 240px;
+  background-color: #357bb3;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  transition: all 300ms ease;
+  box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.8),
+    inset -2px -5px 5px rgba(0, 0, 0, 0.2),
+    4px 4px 4px rgba(255, 255, 255, 1);
+  transform: scale(0.4);
+}
+
+/* BACKDROP */
+.backdrops {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  height: 100px;
+  width: 100px;
+  transition: all 300ms ease;
+}
+
+.backdrop {
+  height: 200px;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 100%;
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 300ms ease;
+}
+
+.backdrop::after,
+.backdrop::before {
+  content: "";
+  height: 200px;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 100%;
+  position: absolute;
+  transition: all 300ms ease;
+}
+
+.backdrop::before {
+  left: 15%;
+}
+
+.backdrop::after {
+  left: 30%;
+}
+
+/* CLOUDS */
+.clouds {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  transition: all 300ms ease;
+}
+
+.cloud {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  background-color: #fbfbfb;
+  height: 20px;
+  width: 100px;
+  border-radius: 0 100px 100px 100px;
+  transform: scale(-0.8, 0.8);
+}
+
+.cloud::before {
+  content: "";
+  position: absolute;
+  background-color: #fbfbfb;
+  height: 20px;
+  width: 80px;
+  bottom: 18px;
+  left: 0;
+  border-radius: 100px 100px 0 0px;
+}
+
+.cloud::after {
+  content: "";
+  position: absolute;
+  background-color: #fbfbfb;
+  height: 40px;
+  width: 40px;
+  bottom: 18px;
+  left: 10px;
+  border-radius: 100%;
+}
+
+.cloud-1 {
+  top: 45%;
+  right: 22%;
+  transform: scale(-0.6, 0.6);
+  opacity: 0.5;
+}
+
+.cloud-2 {
+  top: 20%;
+  right: 0%;
+  transform: scale(-0.6, 0.6);
+  opacity: 0.5;
+}
+
+.cloud-3 {
+  top: 92%;
+  right: 35%;
+}
+
+.cloud-4 {
+  top: 85%;
+  right: 10%;
+  transform: scale(-1, 1);
+}
+
+.cloud-5 {
+  top: 60%;
+  right: -18%;
+  transform: rotateZ(-50deg) scale(-1, 1);
+}
+
+/* SUN MOON */
+.sun-moon {
+  height: 100px;
+  width: 100px;
+  background-color: #f1c428;
+  border-radius: 100%;
+  box-shadow: inset 2px 5px 3px rgba(255, 255, 255, 0.5),
+    inset -2px -5px 3px rgba(0, 0, 0, 0.5),
+    5px 5px 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transition: 300ms ease;
+}
+
+/* NIGHT MODE ON SWITCH */
+.stars {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: -50%;
+  left: 0;
+  transform: translate(0, -50%);
+  transition: all 300ms ease;
+}
+
+.star {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  height: 6px;
+  width: 6px;
+  border-radius: 100%;
+  background-color: #c4c9d2;
+  box-shadow: 0 0 4px #fff;
+  animation: twinkle 1s infinite alternate;
+}
+
+.star::before {
+  content: "";
+  position: absolute;
+  left: 300%;
+  top: 300%;
+  height: 4px;
+  width: 4px;
+  border-radius: 100%;
+  background-color: #c4c9d2;
+  box-shadow: 0 0 4px #fff;
+}
+
+.star::after {
+  content: "";
+  position: absolute;
+  left: 400%;
+  bottom: 400%;
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background-color: #c4c9d2;
+  box-shadow: 0 0 4px #fff;
+}
+
+.star-2 {
+  left: 40%;
+  top: 10%;
+  transform: rotateZ(75deg) scale(1.1);
+  animation-delay: 300ms;
+}
+
+.star-3 {
+  left: 40%;
+  top: 60%;
+  transform: rotateZ(150deg) scale(0.8);
+  animation-delay: 600ms;
+}
+
+.crater {
+  display: none;
+  position: absolute;
+  left: 30%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  height: 30px;
+  width: 30px;
+  background-color: #949eb2;
+  border-radius: 100%;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.crater::before {
+  content: "";
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  background-color: #949eb2;
+  border-radius: 100%;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.crater::after {
+  content: "";
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  bottom: 40%;
+  left: 150%;
+  background-color: #949eb2;
+  border-radius: 100%;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+/* SWITCH STATES */
+#toggle-div.night {
+  background-color: #1d1f2b;
+}
+
+input:checked ~ .clouds {
+  top: 150%;
+}
+
+input:checked ~ .sun-moon {
+  left: calc(100% - 110px);
+  background-color: #c4c9d2;
+  transform: rotateZ(180deg);
+}
+
+input:checked ~ .backdrops {
+  left: calc(100% - 130px);
+}
+
+input:checked ~ .sun-moon .crater {
+  display: block;
+}
+
+input:checked ~ .stars {
+  top: 50%;
+}
+
+@keyframes twinkle {
+  from { opacity: 1; }
+  to { opacity: 0.5; }
+}
+
+/* --- hiệu ứng cho phần sáng/tối mở ra --- */
+
+.theme-wrapper {
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+#theme-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.6);
+  color: #111;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+#theme-btn:hover {
+  background: rgba(255,255,255,0.8);
+}
+
+/* Hiệu ứng ẩn/hiện của phần gạt */
+#theme-toggle-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, margin-top 0.4s ease;
+  display: flex;
+  justify-content: center;
+}
+
+#theme-toggle-container.active {
+  max-height: 200px;
+  margin-top: 10px;
+}
+
+#theme-btn.active {
+  transform: translateY(-10px);
+}
+
+/* Giữ nguyên toàn bộ phần CSS Day/Night switch (mây, sao, mặt trăng, .sun-moon, .backdrop...) từ file bạn gửi — không cần thay đổi */

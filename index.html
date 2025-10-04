@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Sidebar Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Icon setting -->
+  <div class="settings-icon" onclick="toggleMenu()">⚙️</div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Sidebar -->
+  <div class="settings-sidebar" id="sidebar">
+    <h2 id="r1">⚙️ Setting</h2>
+    <!-- 🌙 Chế độ sáng/tối lên đầu -->
+    <div class="theme-wrapper">
+      <button id="theme-btn" onclick="toggleThemeToggle()">🌙 Chế độ sáng/tối</button>
+
+      <!-- Toggle gạt ẩn -->
+      <div id="theme-toggle-container" class="toggle-hidden">
+        <label for="toggle" id="toggle-label">
+          <div id="toggle-div">
+            <input type="checkbox" id="toggle" />
+            <div class="clouds">
+              <div class="cloud cloud-1"></div>
+              <div class="cloud cloud-2"></div>
+              <div class="cloud cloud-3"></div>
+              <div class="cloud cloud-4"></div>
+              <div class="cloud cloud-5"></div>
+            </div>
+            <div class="backdrops">
+              <div class="backdrop"></div>
+            </div>
+            <div class="stars">
+              <div class="star star-1"></div>
+              <div class="star star-2"></div>
+              <div class="star star-3"></div>
+            </div>
+            <div class="sun-moon">
+              <div class="crater"></div>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Các phần khác -->
+    <button onclick="playMusic()">🎵 Bật/Tắt nhạc</button>
+  </div>
+
+  <!-- Nhạc -->
+  <audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+<script src="rainbow.js" defer></script>
+  <script src="script.js"></script>
+</body>
+</html>
